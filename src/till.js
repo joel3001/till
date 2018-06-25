@@ -31,17 +31,26 @@ function Till () {
 
   this.basket = [];
 
-}
+};
 
 Till.prototype.scan = function (barcode) {
-  return this.items.find((item => item.barcode === barcode)
-  ).fruit;
+  return this.items.find((item => item.barcode === barcode)).fruit;
 };
 
 Till.prototype.addToBasket = function (item) {
   return this.basket.push(item);
+};
+
+Till.prototype.removeFromBasket = function (barcode) {
+  const a = this.items.find((item => item.barcode === barcode)).fruit;
+    if (this.basket.includes(a)) {
+      this.basket.splice(a, 1)
+    };
+  return this.basket;
 }
 
+Till.prototype.totalPrice = function () {
+  return this.basket.forEach()
+};
 
-
-module.exports = Till;
+module.exports = Till
