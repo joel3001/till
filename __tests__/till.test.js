@@ -11,7 +11,7 @@ describe('addToBasket', () => {
   it('adds an item to the basket', () => {
   const till = new Till();
   till.addToBasket('orange');
-  expect(till.basket).toEqual(['orange']);
+  expect(till.basket).toEqual([{'barcode': 789, 'fruit': 'orange', 'price': 7}]);
   });
 });
 
@@ -23,14 +23,18 @@ it('removes the item with the given barcode from the basket', () => {
   till.addToBasket('orange')
   till.addToBasket('apple') 
   till.addToBasket('banana')
-  expect(till.removeFromBasket(123)).toEqual(['orange','apple','banana']);
+  expect(till.removeFromBasket(123)).toEqual([{'barcode': 789, 'fruit': 'orange', 'price': 7},
+                                              {'barcode': 123, 'fruit': 'apple', 'price': 5},
+                                              {'barcode': 456, 'fruit': 'banana', 'price': 6}]);
   });
 });
 
 describe('totalPrice', () => {
 it(' gets the total price of items in the basket', () => {
   const till = new Till();
-  till.basket = ['orange', 'orange', 'pineapple'];
-  expect(till.totalPrice()).toEqual(94);
+  till.addToBasket('apple')
+  till.addToBasket('orange')
+  till.addToBasket('apple') 
+  expect(till.totalPrice()).toEqual(17);
   });
 });

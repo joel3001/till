@@ -37,20 +37,23 @@ Till.prototype.scan = function (barcode) {
   return this.items.find((item => item.barcode === barcode)).fruit;
 };
 
-Till.prototype.addToBasket = function (item) {
-  return this.basket.push(item);
+Till.prototype.addToBasket = function (product) {
+  return this.basket.push(this.items.find((item => item.fruit === product)));
 };
 
 Till.prototype.removeFromBasket = function (barcode) {
-  const a = this.items.find((item => item.barcode === barcode)).fruit;
-    if (this.basket.includes(a)) {
-      this.basket.splice(a, 1)
+  const fruitName = this.items.find((item => item.barcode === barcode));
+    if (this.basket.includes(fruitName)) {
+      this.basket.splice(fruitName, 1)
     };
   return this.basket;
 }
 
 Till.prototype.totalPrice = function () {
-  return this.basket.forEach()
-};
+  return this.basket.reduce((total, item) => {
+    return total + item.price;
+ }, 0);
+ 
+}
 
 module.exports = Till
